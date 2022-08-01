@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" >.npmrc
+
 git checkout -- packages/webpackPartialConfig.js
 
 cd ./packages
@@ -21,4 +23,4 @@ cd ../
 #npm run release
 npm run release -- --yes
 
-#rm .npmrc
+rm .npmrc
