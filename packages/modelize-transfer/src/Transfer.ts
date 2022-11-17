@@ -1,14 +1,15 @@
 import { TransferProcess } from '@modelize/transfer/TransferProcess'
 import { TransferStats } from '@modelize/transfer/TransferStats'
 
-export type TransferLoadFn<LD, L, R> = (loader: L, resumeInfo?: R) => Promise<{
+export type TransferLoadFn<LD, L, O, R> = (loader: L, resumeInfo?: R, opts?: O) => Promise<{
     rows: LD[]
     resumeInfo?: R
 }>
 
-export type TransferWriteFn<WD, W> = (writer: W, row: WD, ...rows: WD[]) => Promise<void>
+export type TransferWriteFn<WD, W, O> = (writer: W, rows: WD[], opts?: O) => Promise<void>
 
 export type TransferBeforeFn<L, W, R> = (loader: L, writer: W) => Promise<R | undefined | void>
+export type TransferBeforeWriteFn<O, WD, R> = (opts: O | undefined, resumeInfo: R | undefined, rows: WD[]) => R
 
 export type TransferFilterFn<LD> = (row: LD) => boolean
 
